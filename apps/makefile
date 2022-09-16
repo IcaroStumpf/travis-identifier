@@ -54,16 +54,24 @@ SRC_FILES1=\
 INC_DIRS=-Isrc -I$(UNITY_ROOT)/src -I$(UNITY_ROOT)/extras/fixture/src
 SYMBOLS=
 
-all: clean compile run
+all: clean compile sanitize cov run
 
 compile:
 	$(C_COMPILER) $(CFLAGS) $(INC_DIRS) $(SYMBOLS) $(SRC_FILES1) -o $(TARGET1)
+
+sanitize:
+	$(C_COMPILER) $(CFLAGS) -fsanitize=address $(INC_DIRS) $(SYMBOLS) $(SRC_FILES1) -o $(TARGET2)
+	./$(TARGET2) -v
+
+cov:
+	$(C_COMPILER) $(CFLAGS) -fprofile-arcs -ftest-coverage $(INC_DIRS) $(SYMBOLS) $(SRC_FILES1) -o $(TARGET3)
+	./$(TARGET3) -v
+	gcov -b foo.c
 
 run:
 	- ./$(TARGET1) -v
 
 clean:
 	$(CLEANUP) $(TARGET1)
-
-ci: CFLAGS += -Werror
-ci: compile
+	$(CLEANUP) $(TARGET2)
+	$(CLEANUP) $(TARGET3)
