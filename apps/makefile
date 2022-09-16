@@ -43,7 +43,11 @@ CFLAGS += -Wundef
 CFLAGS += -Wold-style-definition
 
 TARGET_BASE1=all_tests
+TARGET_BASE2=all_tests
+TARGET_BASE3=all_tests
 TARGET1 = $(TARGET_BASE1)$(TARGET_EXTENSION)
+TARGET2 = $(TARGET_BASE2)$(TARGET_EXTENSION)
+TARGET3 = $(TARGET_BASE3)$(TARGET_EXTENSION)
 SRC_FILES1=\
   $(UNITY_ROOT)/src/unity.c \
   $(UNITY_ROOT)/extras/fixture/src/unity_fixture.c \
