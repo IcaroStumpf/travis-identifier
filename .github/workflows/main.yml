@@ -23,3 +23,9 @@ jobs:
       run: "cd apps; make cov"
     - name: sanitize
       run: "cd apps; make sanitize"
+    - name: run valgrind
+      run: "cd apps; make valgrind"
+    - name: run cppcheck
+      run: "cd apps; make cppcheck"
+      
+    
