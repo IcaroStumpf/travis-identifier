@@ -20,6 +20,6 @@ jobs:
     - name: make
       run: "cd apps; make"
     - name: cov
-      run: "make cov"
+      run: "cd apps; make cov"
     - name: sanitize
-      run: "make sanitize"
+      run: "cd apps; make sanitize"
