@@ -73,7 +73,7 @@ cov:
 	./$(TARGET3) -v
 	gcov -b foo.c
 	
-valgrind: $(C_COMPILER) $(CFLAGS) -fsanitize=address $(INC_DIRS) $(SRC_FILES1) -o $(TARGET4)
+valgrind: gcc -g -fsanitize=address $(INC_DIRS) $(SRC_FILES1) -o $(TARGET4)
 	valgrind --leak-check=full --show-leak-kinds=all ./$(TARGET4) -v 
 	
 cppcheck: 
