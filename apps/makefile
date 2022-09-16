@@ -43,9 +43,13 @@ CFLAGS += -Wold-style-definition
 TARGET_BASE1=all_tests1
 TARGET_BASE2=all_tests2
 TARGET_BASE3=all_tests3
+TARGET_BASE4=all_tests4
+TARGET_BASE5=all_tests5
 TARGET1 = $(TARGET_BASE1)$(TARGET_EXTENSION)
 TARGET2 = $(TARGET_BASE2)$(TARGET_EXTENSION)
 TARGET3 = $(TARGET_BASE3)$(TARGET_EXTENSION)
+TARGET4 = $(TARGET_BASE4)$(TARGET_EXTENSION)
+TARGET5 = $(TARGET_BASE5)$(TARGET_EXTENSION)
 SRC_FILES1=\
   $(UNITY_ROOT)/src/unity.c \
   $(UNITY_ROOT)/extras/fixture/src/unity_fixture.c \
@@ -68,6 +72,12 @@ cov:
 	$(C_COMPILER) $(CFLAGS) -fprofile-arcs -ftest-coverage $(INC_DIRS) $(SRC_FILES1) -o $(TARGET3)
 	./$(TARGET3) -v
 	gcov -b foo.c
+	
+valgrind: $(CLANG_COMPILER) $(CFLAGS) -fsanitize=address $(INC_DIRS) $(SRC_FILES1) -o $(TARGET4)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(TARGET4) -v 
+	
+cppcheck: 
+	cppcheck --enable=all --suppress=missingIncludeSystem $(SRC_FILES1) -o $(TARGET5)
 
 run:
 	./$(TARGET1) -v
@@ -76,3 +86,5 @@ clean:
 	$(CLEANUP) $(TARGET1)
 	$(CLEANUP) $(TARGET2)
 	$(CLEANUP) $(TARGET3)
+	$(CLEANUP) $(TARGET4)
+	$(CLEANUP) $(TARGET5)
