@@ -78,7 +78,7 @@ valgrind:
 	valgrind --leak-check=full --show-leak-kinds=all ./$(TARGET4) -v 
 	
 cppcheck: 
-	cppcheck --enable=all --suppress=missingIncludeSystem $(SRC_FILES1) -o $(TARGET5)
+	cppcheck --enable=all --suppress=missingIncludeSystem $(SRC_FILES1)
 
 run:
 	./$(TARGET1) -v
