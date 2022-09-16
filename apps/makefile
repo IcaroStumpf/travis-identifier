@@ -54,24 +54,23 @@ SRC_FILES1=\
   test/test_runners/TestFoo_Runner.c \
   test/test_runners/all_tests.c
 INC_DIRS=-Isrc -I$(UNITY_ROOT)/src -I$(UNITY_ROOT)/extras/fixture/src
-SYMBOLS=
 
-all: clean compile sanitize cov run
+all: clean compile run
 
 compile:
-	$(C_COMPILER) $(CFLAGS) $(INC_DIRS) $(SYMBOLS) $(SRC_FILES1) -o $(TARGET1)
+	$(C_COMPILER) $(CFLAGS) $(INC_DIRS) $(SRC_FILES1) -o $(TARGET1)
 
 sanitize:
-	$(CLANG_COMPILER) $(CFLAGS) -fsanitize=address $(INC_DIRS) $(SYMBOLS) $(SRC_FILES1) -o $(TARGET2)
+	$(CLANG_COMPILER) $(CFLAGS) -fsanitize=address $(INC_DIRS) $(SRC_FILES1) -o $(TARGET2)
 	./$(TARGET2) -v
 
 cov:
-	$(C_COMPILER) $(CFLAGS) -fprofile-arcs -ftest-coverage $(INC_DIRS) $(SYMBOLS) $(SRC_FILES1) -o $(TARGET3)
+	$(C_COMPILER) $(CFLAGS) -fprofile-arcs -ftest-coverage $(INC_DIRS) $(SRC_FILES1) -o $(TARGET3)
 	./$(TARGET3) -v
 	gcov -b foo.c
 
 run:
-	- ./$(TARGET1) -v
+	./$(TARGET1) -v
 
 clean:
 	$(CLEANUP) $(TARGET1)
