@@ -21,9 +21,7 @@ else
 endif
 
 C_COMPILER=gcc
-ifeq ($(shell uname -s), Darwin)
-C_COMPILER=clang
-endif
+CLANG_COMPILER=clang
 
 UNITY_ROOT=..
 
@@ -42,9 +40,9 @@ CFLAGS += -Wstrict-prototypes
 CFLAGS += -Wundef
 CFLAGS += -Wold-style-definition
 
-TARGET_BASE1=all_tests
-TARGET_BASE2=all_tests
-TARGET_BASE3=all_tests
+TARGET_BASE1=all_tests1
+TARGET_BASE2=all_tests2
+TARGET_BASE3=all_tests3
 TARGET1 = $(TARGET_BASE1)$(TARGET_EXTENSION)
 TARGET2 = $(TARGET_BASE2)$(TARGET_EXTENSION)
 TARGET3 = $(TARGET_BASE3)$(TARGET_EXTENSION)
